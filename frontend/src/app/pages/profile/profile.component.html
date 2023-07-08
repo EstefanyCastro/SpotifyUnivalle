@@ -1,0 +1,34 @@
+<div class="container mt-5" *ngIf="auth.user$ | async as user">
+  <div class="row align-items-center profile-header mb-5">
+    <div class="col-6 col-md-2 text-center">
+      <img [src]="user.picture" class="rounded-circle img-fluid profile-picture mb-3 mb-md-0" />
+    </div>
+    <div class="col-6 col-md-10">
+      <div class="row">
+        <div class="col-md-4">
+          <h2>{{ user.nickname }}</h2>
+          <p class="lead text-muted">{{ user.email }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-2">
+    <h1 class="text-center my-2">Mis canciones favoritas</h1>
+    <div class="row row-cols-1 row-cols-md-5 g-3">
+      <div *ngFor="let song of favoriteSongsDetails" class="col">
+        <div class="card h-100">
+          <img [src]="song.album.images[0].url" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{ song.name }}</h5>
+            <p class="card-text">{{ song.artists[0].name }}</p>
+          </div>
+          <div class="card-footer">
+            <iframe [src]="song.uri | donseguro:'https://open.spotify.com/embed?uri='" width="100%" height="80"
+              frameborder="0" allowtransparency="true"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

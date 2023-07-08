@@ -1,0 +1,48 @@
+<div class="my-4">
+    <div class="row">
+        <div class="col-2">
+            <img [src]="artista.images | noImage" class="img-thumbnail img-circle">
+        </div>
+        <div class="col">
+            <h3>{{artista.name}} </h3>
+            <p>Popularidad : {{artista.popularity}}</p>
+        </div>
+        <div class="col-2">
+            <button routerLink="/search" class="btn btn-outline-danger">Regresar</button>
+        </div>
+    </div>
+</div>
+
+<div class="row m-5">
+    <div class="col">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Foto</th>
+                    <th>Album</th>
+                    <th>Canción</th>
+                    <th>Vista Previa</th>
+                    <th>Favorites</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let track of topTracks">
+                    <td>
+                        <img [src]="track.album.images | noImage" width="50px" height="50px">
+                    </td>
+                    <td>{{track.album.name}}</td>
+                    <td>{{track.name}}</td>
+                    <td>
+                        <!-- <audio [src]="track.preview_url" controls></audio> -->
+                        <iframe [src]="track.uri | donseguro:'https://open.spotify.com/embed?uri='" width="300"
+                            height="80" frameborder="0" allowtransparency="true"></iframe>
+                    </td>
+                    <td>
+                        <button (click)="addToFavorites(track.id)" type="button" class="btn btn-primary">Agregar a
+                            favoritos</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
